@@ -8,27 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Patient APP</title>
+    <title>Update Patient</title>
   </head>
   <body><br>
-
-    <div *ngIf="alertPost" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Woohoo!! Patient Added Successfully</strong> 
-      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div *ngIf="alertDel" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Woohoo!! Patient Deleted Successfully</strong>
-      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
     
-    <!-- <div *ngIf="alertDel"></div>
-    <div  class="modal" tabindex="-1" role="dialog">
+    <!-- <div *ngIf="alertPut">
+    <div class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -38,22 +23,30 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Woohoo!! Patient Deleted Successfully</p>
+            <p>Woohoo!! Patient Updated Successfully</p>
           </div>
           <div class="modal-footer">
             <button (click)="close()" type="button" class="btn btn-primary">Okay</button>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
+  </div> -->
+    
+    <div *ngIf="alertPut" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Woohoo!! Patient Updated Successfully</strong> 
+      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     
 
     <form class="form-group card container" style="width: 18rem;" [formGroup]="patientObj.formPatientGroup">
-      <h3  class="card-title">Please Enter Details </h3><br>
+      <h3  class="card-title">Please Update Details </h3><br>
     Patient Id <input formControlName="idControl"
-    [(ngModel)]= "patientObj.id"  type="text" name="" value="this.id">
+    [(ngModel)]= "patientObj.id" type="text" name="" value="">
     <div  style="color: red" [hidden]= "!(patientObj.formPatientGroup.controls['idControl'].hasError('required'))">*Please enter Id</div>
-    <div *ngIf="patientObj.formPatientGroup.controls['idControl'].errors?.min" style="color: red" >*Id must be non zero</div> 
+    <!-- <div *ngIf="patientObj.formPatientGroup.controls['idControl'].hasErrors?.min" style="color: red" >*Id must be non zero</div>  -->
     <br>
     Patient Name <input formControlName="nameControl"
     [(ngModel)]= "patientObj.patientName"  type="text" name="" value="">
@@ -65,7 +58,7 @@
     <br>
     <input class="btn btn-primary"
     [disabled]="!(patientObj.formPatientGroup.valid)"
-    type="button" value="Add Patient" (click)= "Submit()" >  <br>
+    type="button" value="Update Patient" (click)= "Put()" >  <br>
     </form>
 
 
@@ -84,11 +77,7 @@
             <td>{{pat.id}}</td>
             <td>{{pat.patientName}}</td>
             <td>{{pat.patientProblem}}</td>
-            <td> <input class="btn btn-primary"
-              type="button" value="Delete" (click)= "Delete(pat.patientName)" ></td>
-          <td> <input class="btn btn-primary"
-                type="button" value="Update" [routerLink]="['/UpdatePatient/Update']" ></td>
-           </tr>
+        </tr>
         
       </table> <br><br>
 

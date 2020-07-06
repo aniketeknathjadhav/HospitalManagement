@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalManagementMVC.DAL;
 using HospitalManagementMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace HospitalManagementMVC.Controllers
 {
+    [Authorize]
     [EnableCors("AllowOriginRule")]
     [Route("api/[controller]")]
     [ApiController]
@@ -74,9 +76,20 @@ namespace HospitalManagementMVC.Controllers
     
 
         // PUT api/<PatientApiController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put(PatientModel obj)
         {
+            PatientDal dal = new PatientDal(constr);
+            var search = (from temp in dal.PatientModels
+                          where temp.id == obj.id
+                          select temp)
+                                         .FirstOrDefault();
+
+            dal.PatientModels.Remove(search);
+            dal.Add(obj);
+            dal.SaveChanges();
+            List<PatientModel> recs = dal.PatientModels.ToList<PatientModel>();
+            return Ok(recs);
         }
 
         // DELETE api/<PatientApiController>/5
@@ -90,6 +103,7 @@ namespace HospitalManagementMVC.Controllers
                                          .FirstOrDefault();
 
 
+            
             dal.PatientModels.Remove(search);
             dal.SaveChanges();
             return Ok(1);

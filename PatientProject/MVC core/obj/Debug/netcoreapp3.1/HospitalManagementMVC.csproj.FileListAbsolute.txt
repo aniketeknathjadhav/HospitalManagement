@@ -2,7 +2,6 @@ H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\appset
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\appsettings.json
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\HospitalManagementMVC.exe
-H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.csprojAssemblyReference.cache
 H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.AssemblyInfoInputs.cache
 H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.AssemblyInfo.cs
 H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.RazorAssemblyInfo.cache
@@ -142,5 +141,13 @@ H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\runtim
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+H:\Angular\MS Visual Studio\HospitalManagementMVC\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.csproj.CoreCompileInputs.cache
 H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.MvcApplicationPartsAssemblyInfo.cache
+H:\Angular\MS Visual Studio\HospitalManagementMVC\obj\Debug\netcoreapp3.1\HospitalManagementMVC.csprojAssemblyReference.cache

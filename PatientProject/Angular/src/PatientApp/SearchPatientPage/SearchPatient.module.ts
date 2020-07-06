@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {RouterModule} from "@angular/router"
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 
 
@@ -10,6 +10,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { SearchRoutes } from 'src/Routing/SearchRouting';
 import { CommonModule } from '@angular/common';
 import { SearchPatientComponent } from './SearchPatient.component';
+import { SecurityLogic } from '../Utility/AuthGuard';
+import { LoginPatientModel } from '../LoginPatient/LoginPatient.model';
+import { MyJwtInterceptor } from '../Utility/Interceptor';
 
 @NgModule({
   declarations: [
@@ -17,10 +20,10 @@ import { SearchPatientComponent } from './SearchPatient.component';
   ],
   imports: [
     CommonModule , FormsModule , 
-    RouterModule.forChild(SearchRoutes),HttpClientModule,
+    RouterModule.forChild(SearchRoutes),
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass: MyJwtInterceptor , multi:true}],
   bootstrap: [SearchPatientComponent]
 })
 export class SearchPatientModule { }

@@ -1,12 +1,12 @@
 USE [PatientDb]
 GO
-/****** Object:  Table [dbo].[tblPatientList]    Script Date: 23-06-2020 12.17.00 PM ******/
+/****** Object:  Table [dbo].[tblPatientList]    Script Date: 06-07-2020 1.45.05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tblPatientList](
-	[id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [int] NOT NULL,
 	[patientName] [nvarchar](max) NULL,
 	[patientProblem] [nvarchar](max) NULL,
  CONSTRAINT [PK_tblPatientList] PRIMARY KEY CLUSTERED 

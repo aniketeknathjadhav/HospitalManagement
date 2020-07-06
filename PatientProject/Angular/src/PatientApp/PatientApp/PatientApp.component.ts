@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { analyzeFileForInjectables } from '@angular/compiler';
 import { FormsModule } from "@angular/forms";
 import {RouterModule} from "@angular/router" ;
@@ -6,7 +6,9 @@ import {HttpClient} from '@angular/common/http';
 
 
 
+
 import {PatientModel} from './PatientApp.model'
+
 
 @Component({
  
@@ -15,10 +17,12 @@ import {PatientModel} from './PatientApp.model'
 })
  export class PatientComponent {
                       alertDel:boolean=false; 
+                      alertPost:boolean=false; 
                        title = "HospitalManagement";
                        patientObj: PatientModel = null;
                        pat1:string= "";
-                        patientObjs: Array<PatientModel> = new Array<PatientModel>();
+                       pat2:number= 0;
+                      patientObjs: Array<PatientModel> = new Array<PatientModel>();
    constructor(public Httpobj:HttpClient){
     this.patientObj  = new PatientModel();
     this.SubmitGet();
@@ -54,6 +58,7 @@ import {PatientModel} from './PatientApp.model'
     // + " " + "having" + " " + this.patientObj.patientProblem);
   }
   Success(res){
+       this.alertPost=true; 
        this.patientObjs=res;
        this.patientObj=new PatientModel();
   }
@@ -86,5 +91,24 @@ import {PatientModel} from './PatientApp.model'
  ErrorDel(res){
 
  }
+
+//  @Output() 
+//  eventEmitter: EventEmitter<Object> = new EventEmitter<Object>();
+// Update(){
+//   var pat: any={};
+//   pat.id=this.patientObj.id;
+//   pat.patientName=this.patientObj.patientName;
+//   pat.patientProblem=this.patientObj.patientProblem;
+//   this.eventEmitter.emit(pat);
+  
+
+
+close(){
+  this.alertDel=false;
+  this.alertPost=false; 
+}
+
+
+
 }
 

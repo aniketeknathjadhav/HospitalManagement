@@ -14,7 +14,7 @@ import {PatientModel} from '../PatientApp/PatientApp.model'
   
 })
 export class SearchPatientComponent {
-  
+  alertGet:boolean =false;
 title = "HospitalManagement";
 patientName: string="";
 patientModels: Array<PatientModel> = new Array<PatientModel>();
@@ -31,8 +31,14 @@ constructor(public Httpobj:HttpClient){
   }
   Success(res){
        this.patientModels=res;
+       this.alertGet=true;
   }    
  Error(res){
 
+  }
+
+  close(){
+    this.alertGet=false;
+    
   }
 }
