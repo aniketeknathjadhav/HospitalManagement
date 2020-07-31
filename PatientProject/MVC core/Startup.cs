@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace HospitalManagementMVC
@@ -45,13 +46,18 @@ namespace HospitalManagementMVC
                 };
             });
 
+            services.AddDbContext<PatientDal>(options => options.UseSqlServer(Configuration["ConnStr"].ToString()));
+            services.AddDbContext<SignupPatientDal>(options => options.UseSqlServer(Configuration["ConnStr"].ToString()));
+
+
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
             });
 
-            //services.AddDbContext<PatientDal>(option =>
-            // option.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+            
 
             services.AddControllersWithViews();
 

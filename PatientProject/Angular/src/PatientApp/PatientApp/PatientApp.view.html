@@ -1,106 +1,145 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Patient APP</title>
-  </head>
-  <body><br>
 
-    <div *ngIf="alertPost" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Woohoo!! Patient Added Successfully</strong> 
-      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+  <title>Patient APP</title>
+</head>
 
-    <div *ngIf="alertDel" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Woohoo!! Patient Deleted Successfully</strong>
-      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    
-    <!-- <div *ngIf="alertDel"></div>
-    <div  class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Alert Message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Woohoo!! Patient Deleted Successfully</p>
-          </div>
-          <div class="modal-footer">
-            <button (click)="close()" type="button" class="btn btn-primary">Okay</button>
-          </div>
+<body><br>
+  <p-card [style]="{width: '1000px'}"> 
+    <h2 style="justify-content: center;" > Welcome <i>{{this.username}}</i></h2>
+<hr>
+    <br>
+    <br>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="firstname1">Enter Your Problems</label>
+            <input [(ngModel)]="problemObj.patientProblem" id="firstname1" type="text" pInputText> 
         </div>
-      </div>
-    </div> -->
-    
+        <div class="p-field p-col">
+          <div style="text-align: center;">
+            <p-button label="Add Problem" (click)=AddProblem()></p-button>
+           </div>
+           <br>
+           <p-table styleClass="adminTable"  [value]="this.patientObj.problems" [autoLayout]="true">
+            <ng-template pTemplate="header">
 
-    <form class="form-group card container" style="width: 18rem;" [formGroup]="patientObj.formPatientGroup">
-      <h3  class="card-title">Please Enter Details </h3><br>
-    Patient Id <input formControlName="idControl"
-    [(ngModel)]= "patientObj.id"  type="text" name="" value="this.id">
-    <div  style="color: red" [hidden]= "!(patientObj.formPatientGroup.controls['idControl'].hasError('required'))">*Please enter Id</div>
-    <div *ngIf="patientObj.formPatientGroup.controls['idControl'].errors?.min" style="color: red" >*Id must be non zero</div> 
+              <tr>
+                <th><strong>Problems</strong></th>
+              </tr>
+            </ng-template> 
+            <ng-template pTemplate="body" let-pat>
+            <tr>
+              <td>{{pat.patientProblem}}</td>
+            </tr>
+          </ng-template>
+          </p-table>  
+          <br>
+           <div style="text-align: center;">
+            <p-button label="Submit" (click)=Submit()></p-button>
+           </div>
+        </div>
+      </div> 
+    </p-card>
     <br>
-    Patient Name <input formControlName="nameControl"
-    [(ngModel)]= "patientObj.patientName"  type="text" name="" value="">
-    <div  style="color: red" [hidden]= "!(patientObj.formPatientGroup.controls['nameControl'].hasError('required'))">*Please enter Name</div>
-    <br>
-    Patient Problem <input formControlName="problemControl"
-    [(ngModel)]= "patientObj.patientProblem" type="text"  name="" id="">
-    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['problemControl'].hasError('required'))">*Please enter Problem</div>
-    <br>
-    <input class="btn btn-primary"
-    [disabled]="!(patientObj.formPatientGroup.valid)"
-    type="button" value="Add Patient" (click)= "Submit()" >  <br>
-    </form>
-
-
   
 
-    <table class="table-bordered table-hover table-dark" style="width: 30rem; text-align: center;margin:auto ;">
+  <!-- <div class= " card card-title container-fluid" style="text-align:center" >
+    <h1 style="justify-content: center;" > WELCOME <i>{{this.username}}</i></h1></div>
+  <mat-grid-list cols="2">
+<mat-grid-tile style="max-height: 100px">
+    <div  class="card SignupForm" style="width: 30rem;margin: 20px 0px 200px 20px ;" >
+     <div class="card-body" >
+      <div class="form-group">
+        <label>Enter Your Problem(s)</label>
+        <input type="text" class="form-control" 
+        [(ngModel)]="problemObj.patientProblem">
+        </div>
+        <div style="text-align: center;">
+          <Button  class="btn btn-primary" value="AddProblem" (click)=AddProblem()>Add Problem</Button>
+         </div>
+         <br>
+         <div style="text-align: center;">
+          <Button  class="btn btn-primary" value="Submit" (click)=Submit()>Submit</Button>
+         </div>
+         <br><br>
+         </div></div>
+         -->
 
-        <tr>
-            <td >Id</td>
-            <td >Name</td>
-            <td >Problem</td>
-
-        </tr>
-
-        <tr *ngFor= "let pat of patientObjs">
-            <td>{{pat.id}}</td>
-            <td>{{pat.patientName}}</td>
-            <td>{{pat.patientProblem}}</td>
-            <td> <input class="btn btn-primary"
-              type="button" value="Delete" (click)= "Delete(pat.patientName)" ></td>
-          <td> <input class="btn btn-primary"
-                type="button" value="Update" [routerLink]="['/UpdatePatient/Update']" ></td>
-           </tr>
         
-      </table> <br><br>
-
+     <!-- <br>
+     <div>
      
-
-  
+  </div>
+    <br>
     
+  </mat-grid-tile>
+    </mat-grid-list>    -->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
+
+  <!-- <form [formGroup]="patientObj.formPatientGroup">
+    <h3>Please Enter Details </h3><br>
+    Patient Id <input formControlName="idControl" [(ngModel)]="patientObj.id" type="text" name="" value="this.id">
+    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['idControl'].hasError('required'))">*Please
+      enter Id</div>
+    <br>
+    First Name <input formControlName="firstnameControl" [(ngModel)]="patientObj.firstName" type="text" name=""
+      value="">
+    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['firstnameControl'].hasError('required'))">
+      *Please enter your First Name</div>
+    <br>
+    Last Name <input formControlName="lastnameControl" [(ngModel)]="patientObj.lastName" type="text" name="" value="">
+    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['lastnameControl'].hasError('required'))">
+      *Please enter Last Name</div>
+    <br>
+    Patient Problem <input formControlName="problemControl" [(ngModel)]="problemObj.patientProblem" type="text" name=""
+      id="">
+    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['problemControl'].hasError('required'))">
+      *Please enter Problem</div>
+    <input type="button" value="Add Problem" (click)="AddProblem()"> <br>
+    Contact <input formControlName="contactControl" [(ngModel)]="patientObj.id" type="text" name="" value="this.id">
+    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['contactControl'].hasError('required'))">
+      *Please enter Phone Number</div>
+    <br>
+    <input type="button" value="Submit" (click)="Submit()"> <br>
+  </form> -->
+
+ 
+ <!-- ***********************Add problem table**************************************** -->
+ 
+  
+  <!-- ************************** main table from Server *************************************     -->
+
+    <!-- <table class= "table">
+
+      <tr *ngFor="let pat of patientObjs">
+        <td>Id</td>
+        <td>FirstName</td>
+        <td>LastName</td>
+        <td colspan="2" *ngFor="let p of pat.problems">Problem</td>
+        <td>Contact</td>
+      </tr>
+  
+      <tr *ngFor="let pat of patientObjs">
+        <td>{{pat.id}}</td>
+        <td>{{pat.firstname}}</td>
+        <td>{{pat.lastname}}</td>
+        <td *ngFor="let p of pat.problems">{{p.patientProblem}}</td>
+        <td>{{pat.contact}}</td>
+        <td> <input type="button" value="Delete" (click)="Delete(pat.patientName)"></td>
+        <td> <input type="button" value="Update" [routerLink]="['/UpdatePatient/Update']"></td>
+        
+      </tr>
+  
+    </table> -->
+ 
+   
+
+ 
+</body>
 </html>

@@ -1,13 +1,13 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
 import { analyzeFileForInjectables } from '@angular/compiler';
 import { FormsModule } from "@angular/forms";
-import {RouterModule} from "@angular/router" ;
+import {RouterModule, Router} from "@angular/router" ;
 import {HttpClient} from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 
 
-
-import {PatientModel} from './PatientApp.model'
+import {PatientModel, Problem} from './PatientApp.model'
 
 
 @Component({
@@ -15,98 +15,57 @@ import {PatientModel} from './PatientApp.model'
   templateUrl: './PatientApp.view.html',
   
 })
- export class PatientComponent {
-                      alertDel:boolean=false; 
-                      alertPost:boolean=false; 
+ export class PatientComponent implements OnInit { 
                        title = "HospitalManagement";
                        patientObj: PatientModel = null;
-                       pat1:string= "";
-                       pat2:number= 0;
+                       problemObj:Problem=null;
                       patientObjs: Array<PatientModel> = new Array<PatientModel>();
-   constructor(public Httpobj:HttpClient){
+                      username:string="";
+constructor(public Httpobj:HttpClient,public route:ActivatedRoute,public _route:Router){
     this.patientObj  = new PatientModel();
-    this.SubmitGet();
+    this.problemObj = new Problem();
    }
-
-   
-    SubmitGet(){
-      this.Httpobj.get("https://localhost:44325/api/PatientApi?patientObj=")
-    .subscribe(res=> this.SuccessGet(res),
-    res=> this.ErrorGet(res));}
-   
   
-   SuccessGet(res){
-       this.patientObjs=res;
-   }    
-   ErrorGet(res){
+   ngOnInit() {
+    debugger
+    this.route.queryParams
+      .subscribe(params => {
+        this.username = params.name;
+        this.patientObj.id = params.id;
+      });
+  }
 
-    }
+   AddProblem(){
+   this.patientObj.problems.push(this.problemObj);
+   this.problemObj = new Problem();
+   }
+     
+  
   
     //**********************Add PAtient********************** */
    Submit(){
     var pat: any={};
     pat.id=this.patientObj.id;
-    pat.patientName=this.patientObj.patientName;
-    pat.patientProblem=this.patientObj.patientProblem;
+    pat.problems=[];
+    pat.problems=this.patientObj.problems;
 
     this.Httpobj.post("https://localhost:44325/api/PatientApi"
     ,pat)
     .subscribe(res=> this.Success(res),
     res=> this.Error(res));
     
-    // alert("this is patient" + " " + this.patientObj.patientName 
-    // + " " + "having" + " " + this.patientObj.patientProblem);
+ 
   }
   Success(res){
-       this.alertPost=true; 
-       this.patientObjs=res;
-       this.patientObj=new PatientModel();
+   alert("problems added")
+   this._route.navigate(['/Home']);
   }
 
   Error(res){
 
   }
 
-  //*********************Delete Patient************* */
- Delete(pat:string){
-  
-  this.pat1= pat;
-  this.Httpobj.delete("https://localhost:44325/api/PatientApi?patientName="
-  +this.pat1)
-  .subscribe(res=> this.SuccessDel(res),
-  res=> this.ErrorDel(res));
-  
-  // alert("this is patient" + " " + this.patientObj.patientName 
-  // + " " + "having" + " " + this.patientObj.patientProblem);
- }
- 
- SuccessDel(res){
-    if(res==1){
-     this.alertDel=true;
-     this.SubmitGet();
-    }
-        
- }
 
- ErrorDel(res){
-
- }
-
-//  @Output() 
-//  eventEmitter: EventEmitter<Object> = new EventEmitter<Object>();
-// Update(){
-//   var pat: any={};
-//   pat.id=this.patientObj.id;
-//   pat.patientName=this.patientObj.patientName;
-//   pat.patientProblem=this.patientObj.patientProblem;
-//   this.eventEmitter.emit(pat);
-  
-
-
-close(){
-  this.alertDel=false;
-  this.alertPost=false; 
-}
 
 
 

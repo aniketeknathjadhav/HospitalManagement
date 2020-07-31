@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
 </head>
+
 <body><br>
+    <br>
 
-    <div *ngIf="LoginSuccessfull" class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Woohoo!! LOGIN Successfull</strong> 
-        <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+        <h4 *ngIf="SignupError" class="SignupError">
+            You have not registered. 
+            Please click on Signup</h4>
 
-    <div class="form-group card container" style="width: 18rem;">
+    <br>
+    <!-- <button type="button" pButton (click)="show()" label="Success" class="ui-button-success"></button> -->
 
-        <h3  class="card-title">Please Login </h3><br> 
-        UserName <input type="text" [(ngModel)]="_user.userName">  <br>
-        Password <input type="password"[(ngModel)]="_user.password"><br>
-        <input  class="btn btn-primary" 
-        type="button" value="Login" (click)= "Post()" >  <br>
-    </div>
-    
+    <p-card  class="p-fluid p-formgrid p-grid">
+        
+        <h2>Patient Login</h2>
+        <hr>
+        <br><br>
+        <div class="p-field p-grid" >
+            <label for="UserName" class="p-col-fixed" style="width:100px">UserName</label>
+            <div class="p-col">
+                <input style="height:30px" id="UserName" [(ngModel)]="_user.userName" type="text" pInputText>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="password" class="p-col-fixed" style="width:100px">Password</label>
+            <div class="p-col">
+                <input style="height:30px"  id="password" [(ngModel)]="_user.password" type="password" pInputText>
+            </div>
+        </div>
+
+        <br>
+        <div>
+            <p-button (click)="Post()" label="Login"></p-button><br>
+
+        </div>
+        <br>
+        <h3> Not registered yet? </h3>
+        
+        <div>
+            <p-button [routerLink]="['/Signup']" label="Sign Up"></p-button>
+        </div>
+    </p-card>
+
+
+
+
+
 </body>
+
 </html>

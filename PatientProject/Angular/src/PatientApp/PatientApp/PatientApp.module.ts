@@ -9,9 +9,10 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {PatientComponent} from '../PatientApp/PatientApp.component';
 import { PatientRoutes } from 'src/Routing/PatientRouting';
 import { CommonModule } from '@angular/common';
-import { SecurityLogic } from '../Utility/AuthGuard';
+import {  PatientSecurityLogic } from '../Utility/AuthGuard';
+import { MaterialModule } from '../Utility/Material.module';
+import { PatientInterceptor } from '../Utility/Interceptor';
 import { LoginPatientModel } from '../LoginPatient/LoginPatient.model';
-import { MyJwtInterceptor } from '../Utility/Interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,11 @@ import { MyJwtInterceptor } from '../Utility/Interceptor';
   imports: [
     CommonModule , FormsModule , 
     RouterModule.forChild(PatientRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,MaterialModule,HttpClientModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS, useClass: MyJwtInterceptor , multi:true}],
+  providers: [PatientSecurityLogic,
+    {provide:HTTP_INTERCEPTORS, useClass: PatientInterceptor , multi:true}
+  ],
   bootstrap: [PatientComponent]
 })
 export class PatientModule { }

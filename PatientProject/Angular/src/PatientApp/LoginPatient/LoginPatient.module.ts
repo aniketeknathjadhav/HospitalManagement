@@ -4,18 +4,29 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../Utility/Material.module';
+import { LoginAdminRoute } from 'src/Routing/LoginAdminRouting';
 import { LoginPatientRoute } from 'src/Routing/LoginPatientRouting';
 import { LoginPatientModel } from './LoginPatient.model';
-import { SecurityLogic } from '../Utility/AuthGuard';
-import { MyJwtInterceptor } from '../Utility/Interceptor';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
-@NgModule({
+
+
+
+
+
+
+
+
+@NgModule({ 
 declarations:[
     LoginPatientComponent
 ],
 imports:[
     CommonModule,FormsModule,ReactiveFormsModule,
-    RouterModule.forChild(LoginPatientRoute) 
+    RouterModule.forChild(LoginPatientRoute),MaterialModule,
+    HttpClientModule,MessagesModule,MessageModule
 ],
 providers:[],
 bootstrap:[LoginPatientComponent]

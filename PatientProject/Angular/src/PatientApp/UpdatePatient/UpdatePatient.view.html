@@ -1,95 +1,338 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <title>Update</title>
+</head>
+
+<body><br>
+  <p-card class="p-field p-grid" styleClass="signup-card-content">
+  
+    <h2>Update Form</h2>
+    <hr style="border:1px solid black;">
+    <br>
+    
+    <form [formGroup]="patientObj.formPatientGroup" >
+    <div class="p-field p-grid">
+      <label for="firstname3" class="p-col-fixed">Firstname</label>
+      <div class="p-col">
+          <input [(ngModel)]="patientObj.firstName" 
+          id="firstname3" type="text" formControlName="firstNameControl"  pInputText >
+          <div style="color: red" 
+          *ngIf="patientObj.formPatientGroup.dirty" 
+          [hidden]="!(patientObj.formPatientGroup.controls['firstNameControl']
+          .hasError('required'))">
+            *Please enter your First Name</div> 
+                    <br> 
+        </div>
+      </div>  
+      
+      
+  <div class="p-field p-grid">
+      <label for="lastname3" class="p-col-fixed">Lastname</label>
+      <div class="p-col">
+          <input [(ngModel)]="patientObj.lastName"
+          id="lastname3" type="text" formControlName="lastNameControl" pInputText> 
+          <div  style="color: red" 
+          *ngIf="patientObj.formPatientGroup.dirty" 
+          [hidden]="!(patientObj.formPatientGroup.controls['lastNameControl']
+          .hasError('required'))">
+            *Please enter Last Name</div>   
+            <br> 
+      </div>
+  </div>
+
+  <div class="p-field p-grid">
+    <label for="lastname3" class="p-col-fixed">Gender</label>
+    <div class="p-col">
+        <input [(ngModel)]="patientObj.gender"
+        id="lastname3" type="text" formControlName="lastNameControl" pInputText> 
+        <div  style="color: red" 
+        *ngIf="patientObj.formPatientGroup.dirty" 
+        [hidden]="!(patientObj.formPatientGroup.controls['genderControl']
+        .hasError('required'))">
+          *Please enter Gender</div>   
+          <br> 
+    </div>
+</div>
+
+ 
+
+<div class="p-field p-grid">
+  <label for="Email" class="p-col-fixed">Email</label>
+  <div class="p-col" style="padding-left: 30px;">
+      <input  [(ngModel)]="patientObj.email"
+      id="Email" type="text"  formControlName="emailControl" pInputText> 
+      <div style="color: red"  
+      *ngIf="patientObj.formPatientGroup.dirty" [hidden]="!(patientObj.formPatientGroup.controls['emailControl']
+      .hasError('required'))">
+       *Please enter Email</div>
+     <br>
+  </div>
+</div>
+
+<div class="p-field p-grid">
+  <label for="Contact" class="p-col-fixed">Contact</label>
+  <div class="p-col" style="padding-left: 15px;">
+      <input [(ngModel)]="patientObj.contact"
+      id="Contact" type="text"  formControlName="contactControl" pInputText> 
+      <div style="color: red" 
+      *ngIf="patientObj.formPatientGroup.dirty" [hidden]="!(patientObj.formPatientGroup.controls['contactControl']
+      .hasError('required'))">
+        *Please enter Phone Number</div>
+      <br>
+  </div>
+</div>
+
+<br>
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col">
+      <label for="firstname1">Enter Your Problems</label>
+      <input [(ngModel)]="problemObj.patientProblem" id="firstname1" type="text" pInputText> 
+  </div>
+  <div class="p-field p-col">
+    <div style="text-align: center;">
+      <p-button label="Add Problem" (click)=AddProblem()></p-button>
+     </div>
+     <br>
+     <p-table styleClass="adminTable"  [value]="this.patientObj.problems" [autoLayout]="true">
+      <ng-template pTemplate="header">
+
+        <tr>
+          <th><strong>Problems</strong></th>
+        </tr>
+      </ng-template> 
+      <ng-template pTemplate="body" let-pat>
+      <tr>
+        <td>{{pat.patientProblem}}</td>
+      </tr>
+    </ng-template>
+    </p-table>  
+    <br>
+     <div style="text-align: center;">
+      <p-button label="Submit" (click)=Submit()></p-button>
+     </div>
+  </div>
+</div> 
+
+</form>
+</p-card>
+
+
+
+
+
+
+  <!-- <p-card header="Admin Login" class="p-fluid p-formgrid p-grid">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col">
+        <label for="firstname1">Firstname</label>
+        <input id="firstname1" type="text" pInputText [(ngModel)]="patientObj.firstName">> 
+    </div>
+    <div class="p-field p-col">
+        <label for="lastname1">Lastname</label>
+        <input id="lastname1" type="text" pInputText [(ngModel)]="patientObj.lastName">> 
+    </div>
+    <br>
+    <div class="p-fluid p-formgrid p-grid">
+    <div class="p-formgroup-inline">
+      <div class="p-field-checkbox">
+      <p-radioButton inputId="male" (change)="Gender('male')"></p-radioButton>
+      <label for="male">Male</label>
+      </div>
+      <div class="p-field-checkbox">
+          <p-radioButton inputId="female" (change)="Gender('female')"></p-radioButton>
+          <label for="female">Female</label>
+      </div>
+  </div>
+  <div class="p-field p-col">
+    <label for="email">Email</label>
+    <input id="email" type="text" pInputText [(ngModel)]="patientObj.email">> 
+</div>
+<div class="p-field p-col">
+  <label for="contact">Contact</label>
+  <input id="contact" type="text" pInputText [(ngModel)]="patientObj.contact">> 
+</div>
+</div>
+
+<br>
+<div class="p-fluid p-formgrid p-grid">
+
+<div class="p-field p-col">
+  <label for="Username">Username</label>
+  <input id="Username" type="text" pInputText [(ngModel)]="patientObj.userName">> 
+</div>
+<div class="p-field p-col">
+  <label for="Password">Password</label>
+  <input id="Password" type="text" pInputText [(ngModel)]="patientObj.password"> > 
+</div>
+<div style="text-align: center;">
+  <p-button  class="btn btn-primary" value="Submit" (click)=Post()>Submit</p-button>
+ </div>
+</div>
+  </div>
+  </p-card> -->
+<!-- 
+  <div class= " card card-title container-fluid" style="text-align:center" >
+    <h1 style="justify-content: center;" > Enter Your Details</h1></div>
+  <mat-grid-list cols="2">
+<mat-grid-tile style="max-height: 100px">
+  <div  class="card SignupForm" style="width: 30rem;" [formGroup]="patientObj.formPatientGroup">
+    <div class="card-body" >
+     <form [formGroup]="patientObj.formPatientGroup">
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" formControlName="firstNameControl" [(ngModel)]="patientObj.firstName">
+        
+      </div>
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastNameControl" [(ngModel)]="patientObj.lastName">
+       </div>
+
+      <label style="padding-right: 10px">Gender</label>
+      <input (change)="Gender('male')" style="padding-right: 10px" type="radio" name="exampleRadios" id="exampleRadios1" 
+      value="option1" >
+        <label style="padding-right: 10px" for="exampleRadios1">
+          Male
+        </label>
+        <input  (change)="Gender('female')" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label for="exampleRadios2">
+          Female
+        </label>
+      
+      <br>
+      <div class="form-group" [formGroup]="patientObj.formPatientGroup">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" formControlName="emailControl" [(ngModel)]="patientObj.email">
+       
+      </div>
+    </form> 
+      
+    </div>
+  </div>
+</mat-grid-tile>
+<mat-grid-tile style="max-height: 100px">
+  <div class="card SignupForm" style="width: 30rem;" [formGroup]="patientObj.formPatientGroup">
+    <div class="card-body">
+      
+       <div class="form-group">
+        <label>Contact</label>
+        <input type="text" class="form-control" formControlName="contactControl" [(ngModel)]="patientObj.contact">
+        
+       </div>
+       <div class="userName">
+        <label>User Name</label>
+        <input type="text" class="form-control" formControlName="userNameControl" [(ngModel)]="patientObj.userName">
+        
+       </div><br>
+       <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" formControlName="passwordControl" [(ngModel)]="patientObj.password">
+       
+       </div>
+       <div style="text-align: center;">
+        <Button  class="btn btn-primary"  (click)=Post()>Sign Up</Button></div>
+       </div>
+ </div>
+ </mat-grid-tile>
+  </mat-grid-list> -->
+ 
+
+
+ 
+  
+
+
+   
+
+
+
+
+ 
+</body>
+</html>
+
+
+
+
+<!-- <!doctype html>
+<html lang="en"> -->
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <!-- <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <title>Update Patient</title>
   </head>
+  
   <body><br>
-    
-    <!-- <div *ngIf="alertPut">
-    <div class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Alert Message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Woohoo!! Patient Updated Successfully</p>
-          </div>
-          <div class="modal-footer">
-            <button (click)="close()" type="button" class="btn btn-primary">Okay</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-    
-    <div *ngIf="alertPut" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Woohoo!! Patient Updated Successfully</strong> 
-      <button (click)="close()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    
+     <form [formGroup]="patientObj.formPatientGroup">
+      <h3>Please Enter Details </h3><br>
+      Patient Id <input formControlName="idControl" [(ngModel)]="patientObj.id" type="text" name="" value="this.id">
+      <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['idControl'].hasError('required'))">*Please
+        enter Id</div>
+      <br>
+      First Name <input formControlName="firstnameControl" [(ngModel)]="patientObj.firstName" type="text" name=""
+        value="">
+      <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['firstnameControl'].hasError('required'))">
+        *Please enter your First Name</div>
+      <br>
+      Last Name <input formControlName="lastnameControl" [(ngModel)]="patientObj.lastName" type="text" name="" value="">
+      <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['lastnameControl'].hasError('required'))">
+        *Please enter Last Name</div>
+      <br>
+      Patient Problem <input formControlName="problemControl" [(ngModel)]="problemObj.patientProblem" type="text" name=""
+        id="">
+      <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['problemControl'].hasError('required'))">
+        *Please enter Problem</div>
+      <input type="button" value="Add Problem" (click)="AddProblem()"> <br>
+      Contact <input formControlName="contactControl" [(ngModel)]="patientObj.id" type="text" name="" value="this.id">
+      <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['contactControl'].hasError('required'))">
+        *Please enter Phone Number</div>
+      <br>
+      <input type="button" value="Submit" (click)="Submit()"> <br>
+    </form> -->
 
-    <form class="form-group card container" style="width: 18rem;" [formGroup]="patientObj.formPatientGroup">
-      <h3  class="card-title">Please Update Details </h3><br>
-    Patient Id <input formControlName="idControl"
-    [(ngModel)]= "patientObj.id" type="text" name="" value="">
-    <div  style="color: red" [hidden]= "!(patientObj.formPatientGroup.controls['idControl'].hasError('required'))">*Please enter Id</div>
-    <!-- <div *ngIf="patientObj.formPatientGroup.controls['idControl'].hasErrors?.min" style="color: red" >*Id must be non zero</div>  -->
-    <br>
-    Patient Name <input formControlName="nameControl"
-    [(ngModel)]= "patientObj.patientName"  type="text" name="" value="">
-    <div  style="color: red" [hidden]= "!(patientObj.formPatientGroup.controls['nameControl'].hasError('required'))">*Please enter Name</div>
-    <br>
-    Patient Problem <input formControlName="problemControl"
-    [(ngModel)]= "patientObj.patientProblem" type="text"  name="" id="">
-    <div style="color: red" [hidden]="!(patientObj.formPatientGroup.controls['problemControl'].hasError('required'))">*Please enter Problem</div>
-    <br>
-    <input class="btn btn-primary"
-    [disabled]="!(patientObj.formPatientGroup.valid)"
-    type="button" value="Update Patient" (click)= "Put()" >  <br>
-    </form>
+  <!-- ***********************Add problem table**************************************** -->
+  <!-- <table>
 
+    <tr>
+        <td >Problem</td>
+    </tr>
+   <tr *ngFor= "let pat of patientObj.problems">
+        <td>{{pat.patientProblem}}</td>
+   </tr>
+
+    </table>
+    <br> -->
 
   
 
-    <table class="table-bordered table-hover table-dark" style="width: 30rem; text-align: center;margin:auto ;">
+  <!-- ************************** main table from Server *************************************     -->
+  <!-- <table>
 
-        <tr>
-            <td >Id</td>
-            <td >Name</td>
-            <td >Problem</td>
+    <tr>
+        <td >Id</td>
+        <td >Name</td>
+        <td *ngFor= "let pat of patientObj.problems" >Problem</td>
+   </tr>
 
-        </tr>
-
-        <tr *ngFor= "let pat of patientObjs">
-            <td>{{pat.id}}</td>
-            <td>{{pat.patientName}}</td>
-            <td>{{pat.patientProblem}}</td>
-        </tr>
-        
-      </table> <br><br>
-
-     
+    <tr *ngFor= "let pat of patientObjs">
+        <td>{{pat.id}}</td>
+        <td>{{pat.patientName}}</td>
+        <td *ngFor= "let pat of patientObjs">{{pat.problems}}</td>
+    </tr>
+    
+  </table> <br><br>    
 
   
     
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </body>
+</html> --> -->

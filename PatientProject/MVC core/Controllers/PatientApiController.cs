@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Threading.Tasks;
 using HospitalManagementMVC.DAL;
 using HospitalManagementMVC.Models;
@@ -22,11 +23,14 @@ namespace HospitalManagementMVC.Controllers
     public class PatientApiController : ControllerBase
     {
         string constr = "";
+        PatientDal pDal = null;
+        SignupPatientDal sDal = null;
 
-        public PatientApiController(IConfiguration configuration)
+        public PatientApiController(IConfiguration configuration, PatientDal _pDal, SignupPatientDal _sDal)
         {
-
             constr = configuration["ConnStr"];
+            pDal = _pDal;
+            sDal = _sDal;
         }
 
         // GET: api/<PatientApiController>
@@ -36,81 +40,122 @@ namespace HospitalManagementMVC.Controllers
 
         //}
 
-        [EnableCors("AllowOriginRule")]
-        // GET api/<PatientApiController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(string patientName)
-        {
-            PatientDal dal = new PatientDal(constr);
-            List<PatientModel> search = (from temp in dal.PatientModels
-                                         where temp.patientName == patientName
-                                         select temp)
-                                         .ToList<PatientModel>();
-            
-            return Ok(search);
-        }
+
+
+
 
         [EnableCors("AllowOriginRule")]
         [HttpGet]
         public IActionResult Get()
         {
-            // add more  var constr2 = configuration.GetConnectionString("ConString2");
-            PatientDal dal = new PatientDal(constr);
-            List<PatientModel> recs = dal.PatientModels.ToList<PatientModel>();
-            return Ok(recs);
+            // var prob = dal.Patients.Include(p => p.problems).ToList();
+            // var prob = dal.Problems.Include("patientProblem").ToList();
+
+             var pat = (from pDal in pDal.Patients.Include(p => p.problems)
+                       select pDal).ToList();
+
+            var result = (from p in pat
+                          join sDal in sDal.SignupPatients
+                          on p.id equals sDal.id
+                          select new {
+                              problems = p.problems,
+                              id = sDal.id,
+                              firstName = sDal.firstName,
+                              lastName = sDal.lastName,
+                              contact = sDal.contact,
+                              email = sDal.email,
+                              gender = sDal.gender
+                          }).ToList();
+            
+
+            // List<Patient> recs = dal.Patients.Include(p=> p.problems).ToList<Patient>();
+
+            return Ok(result);
         }
 
-        [EnableCors("AllowOriginRule")]
-        // POST api/<PatientApiController>
+
         [HttpPost]
-        public IActionResult Post( PatientModel obj)
+        public IActionResult Post(Patient obj)
         {
-            // add more  var constr2 = configuration.GetConnectionString("ConString2");
-            PatientDal dal = new PatientDal(constr);
-            dal.Database.EnsureCreated(); // creates TblPatient
-            dal.Add(obj); // first saves in memory
-            dal.SaveChanges();//then saves physically in sql
-            List<PatientModel> recs = dal.PatientModels.ToList<PatientModel>();
+
+            pDal.Add(obj); // first saves in memory
+            pDal.SaveChanges();//then saves physically in sql
+            List<Patient> recs = pDal.Patients.Include(p => p.problems).ToList<Patient>();
+
             return Ok(recs);
         }
-    
 
-        // PUT api/<PatientApiController>/5
-        [HttpPut]
-        public IActionResult Put(PatientModel obj)
+
+       // PUT api/<PatientApiController>/5
+         [HttpPut]
+        public IActionResult Put(AdminPatientModel obj)
         {
-            PatientDal dal = new PatientDal(constr);
-            var search = (from temp in dal.PatientModels
-                          where temp.id == obj.id
+
+            var pat = (from temp in pDal.Patients.Include(p => p.problems)
+                       where temp.id == obj.id
                           select temp)
                                          .FirstOrDefault();
 
-            dal.PatientModels.Remove(search);
-            dal.Add(obj);
-            dal.SaveChanges();
-            List<PatientModel> recs = dal.PatientModels.ToList<PatientModel>();
-            return Ok(recs);
+            var pat2 = (from temp in sDal.SignupPatients
+                          where temp.id == obj.id
+                          select temp)
+                                        .FirstOrDefault();
+            if(pat != null)
+            {
+                pat.problems = obj.problems;
+            }
+
+            if(pat2 != null)
+            {
+                pat2.firstName = obj.firstName;
+                pat2.lastName = obj.lastName;
+                pat2.gender = obj.gender;
+                pat2.email = obj.email;
+                pat2.contact = obj.contact;
+            }
+
+           //Update sytax-  context.Products.Update(entity);
+
+            pDal.Patients.Update(pat);
+            pDal.SaveChanges();
+            sDal.SignupPatients.Update(pat2);
+            sDal.SaveChanges();
+            return Ok(1);
         }
 
         // DELETE api/<PatientApiController>/5
         [HttpDelete]
-        public IActionResult Delete(string patientName)
+        public IActionResult Delete(int id)
         {
-            PatientDal dal = new PatientDal(constr);
-            var search = (from temp in dal.PatientModels
-                                         where temp.patientName == patientName
-                                         select temp)
+
+            var pat = (from temp in pDal.Patients
+                       where temp.id == id
+                          select temp)
                                          .FirstOrDefault();
 
+            var sign= (from temp in sDal.SignupPatients
+                       where temp.id == id
+                       select temp)
+                                         .FirstOrDefault();
 
-            
-            dal.PatientModels.Remove(search);
-            dal.SaveChanges();
+            pDal.Patients.Remove(pat);
+            pDal.SaveChanges();
+            sDal.SignupPatients.Remove(sign);
+            sDal.SaveChanges();
             return Ok(1);
 
         }
 
-            
-        
+
+
     }
+
+   
+        
+
+        // POST api/<PatientApiController>/5
+
+
+    
 }
+       

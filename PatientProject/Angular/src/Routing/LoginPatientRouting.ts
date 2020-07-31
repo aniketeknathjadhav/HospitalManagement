@@ -3,7 +3,7 @@ import { LoginPatientComponent } from 'src/PatientApp/LoginPatient/LoginPatient.
 
 
 export const LoginPatientRoute= [
-    {path:'Login' , component : LoginPatientComponent}
+    {path:'Patient' , component : LoginPatientComponent}
 ]
 
 

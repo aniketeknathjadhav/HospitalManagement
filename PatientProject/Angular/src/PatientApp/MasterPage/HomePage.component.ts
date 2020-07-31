@@ -9,8 +9,14 @@ import {RouterModule} from "@angular/router" ;
   
 })
 export class HomePageComponent {
-  
-title = "Home Page of Hospital management";
+  patiet: number[] = [];
+  title = "Home Page of Hospital management";
+constructor(){
+  this.patiet.push(212,213,4534,345);
+}
+
+
+
 
 
 

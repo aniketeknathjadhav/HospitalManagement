@@ -1,9 +1,9 @@
+// import { UpdatePatientModel } from 'src/PatientApp/UpdatePatient/UpdatePatient.model';
 
 
-import { UpdatePatientComponent } from 'src/PatientApp/UpdatePatient/UpdatePatient.component';
 
-export const UpdateRoutes = [ 
+// export const UpdateRoutes = [ 
    
-    { path: 'Update', component : UpdatePatientComponent }
-];
+//     { path: 'Update', component : UpdatePatientModel }
+// ];
 

@@ -9,20 +9,31 @@ using HospitalManagementMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Cors;
+using HospitalManagementMVC.DAL;
+using Microsoft.Extensions.Configuration;
+
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HospitalManagementMVC.Controllers
 {
+
     [EnableCors("AllowOriginRule")]
     [Route("api/[controller]")] 
     [ApiController]
     public class SecurityController : ControllerBase
     {
         // GET: api/<ValuesController>
-       
-        
+        string constr = "";
+        SignupPatientDal dal = null;
+        public SecurityController(IConfiguration configuration, SignupPatientDal _dal)
+        {
+            constr = configuration["ConnStr"];
+            dal = _dal;
+        }
+
+
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
@@ -51,16 +62,40 @@ namespace HospitalManagementMVC.Controllers
               "finishingschool",
               claims,
               expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
+              signingCredentials: credentials);;
+
 
             string tokenstring = new JwtSecurityTokenHandler().WriteToken(token);
             return  tokenstring ;
         }
+
+
         // POST api/<ValuesController>
         [HttpPost]
-        public IActionResult Post([FromBody] LoginPatientModel obj)
+        public IActionResult Post([FromBody] LoginPatient obj)
         {
-            if (obj.userName == "Aniket" && obj.password == "@password123") 
+          var result = dal.SignupPatients.Where(a => a.userName == obj.userName && a.password == obj.password).FirstOrDefault();
+         
+            if (result!= null)
+            {
+                obj.id = result.id;
+                obj.token = GenerateToken(obj.userName);
+                obj.password = "";
+                return Ok(obj);
+            }
+
+            else
+            {
+                return StatusCode(401, "This is not valid patient");
+            }
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult Post([FromBody] LoginAdmin obj)
+        {
+           // var result = dal.SignupPatients.Where(a => a.userName == obj.userName && a.password == obj.password).FirstOrDefault();
+
+            if (obj.userName=="Aniket" && obj.password=="@password123")
             {
                 obj.token = GenerateToken(obj.userName);
                 obj.password = "";

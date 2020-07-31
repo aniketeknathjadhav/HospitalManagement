@@ -1,5 +1,6 @@
 ﻿using HospitalManagementMVC.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,47 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementMVC.DAL
 {
-    public class PatientDal:DbContext 
+    public class PatientDal:DbContext
     {
-        private string constr;
-
-        public PatientDal(string constr)
+        public PatientDal(DbContextOptions<PatientDal> options) : base(options)
         {
-            this.constr = constr;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //creating the connection string
         //should be in appsetting.json
-        {
-            optionsBuilder.UseSqlServer(constr);
-            //optionsBuilder.UseSqlServer(@"Data Source=S18RNHN5;Initial Catalog=PatientDb;Integrated Security=True");
-        }
+        //{
+        //optionsBuilder.UseSqlServer(constr);
+        //optionsBuilder.UseSqlServer(@"Data Source=S18RNHN5;Initial Catalog=PatientDb;Integrated Security=True");
+
 
         //mapping code below
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //insert pRimary key
-            modelBuilder.Entity<PatientModel>().HasKey(a => a.id);
+            modelBuilder.Entity<Patient>().HasKey(a => a.id);
+            //insert pRimary key
+            modelBuilder.Entity<Problem>().HasKey(a => a.id) ;
+            //foreign key
             // identity insert off code
-            modelBuilder.Entity<PatientModel>().Property(e => e.id).ValueGeneratedNever();
+            modelBuilder.Entity<Patient>().Property(e => e.id).ValueGeneratedNever();
+            modelBuilder.Entity<Problem>().Property(e => e.id).UseIdentityColumn();
+           // modelBuilder.Entity<Problem>().Property(e => e.problemId).ValueGeneratedOnAdd();
             //this is the mapping code . map model with db
-            modelBuilder.Entity<PatientModel>().ToTable("tblPatientList");
-           
+            modelBuilder.Entity<Patient>().ToTable("PatientList");
+            modelBuilder.Entity<Problem>().ToTable("ProblemList");
+            modelBuilder.Entity<Patient>()
+                .HasMany(o => o.problems)
+                .WithOne(o => o.patient)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            
         }
-        public DbSet<PatientModel> PatientModels { get; set; } //set the properties
+        public DbSet<Patient> Patients { get; set; }
+
+        //set the properties
     }
 }

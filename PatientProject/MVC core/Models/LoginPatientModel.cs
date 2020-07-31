@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementMVC.Models
 {
-    public class LoginPatientModel
+    public class LoginPatient
     {
+        public int id { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
 

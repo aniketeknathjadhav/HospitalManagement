@@ -3,11 +3,10 @@ from '@angular/forms'
 
 export class PatientModel{
     id:number=0;
-    patientName:string="";
-    patientProblem:string="";
+    problems:Array<Problem> = new Array<Problem>();
     //make Formgroup object
-formPatientGroup:FormGroup=null;
-constructor(){
+ formPatientGroup:FormGroup=null;
+ constructor(){
     //make tree structure
     //make builder object 
     var _builder = new FormBuilder 
@@ -17,9 +16,19 @@ constructor(){
     this.formPatientGroup.addControl("idControl",new FormControl('',Validators.required));
      this.formPatientGroup.addControl("idControl",new 
     FormControl('',Validators.min(1)));
-    //add controller for other properties here it is for patientproblem
-    this.formPatientGroup.addControl("nameControl",new FormControl('',Validators.required));
-    
-    this.formPatientGroup.addControl("problemControl",new FormControl('',Validators.required));
+     //add controller for other properties here it is for patientproblem
+ 
+     this.formPatientGroup.addControl("problemControl",new FormControl('',Validators.required));
+
+
+ }
 }
+
+export class Problem
+{
+    id:number=0;
+    patientProblem:string="";
 }
+
+
+

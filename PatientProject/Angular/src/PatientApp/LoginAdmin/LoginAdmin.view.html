@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body ><br>
+<br>
+
+<p-card class="p-fluid p-formgrid p-grid">
+    <h2>Admin Login</h2>
+    <hr>
+    <br><br>
+    <div class="p-field p-grid" >
+        <label for="UserName" class="p-col-fixed" style="width:100px">UserName</label>
+        <div class="p-col">
+            <input style="height:30px" id="UserName" [(ngModel)]="_user.userName" type="text" pInputText>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <label for="password" class="p-col-fixed" style="width:100px">Password</label>
+        <div class="p-col">
+            <input style="height:30px"  id="password" [(ngModel)]="_user.password" type="password" pInputText>
+        </div>
+    </div>
+
+    <br>
+    <div>
+        <p-button (click)="Post()" label="Login"></p-button><br>
+    </div>
+
+</p-card>
+
+
+
+</body>
+
+</html>
