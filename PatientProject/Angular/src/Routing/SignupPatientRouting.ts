@@ -1,4 +1,4 @@
-import { SignupPatientComponent } from 'src/PatientApp/SignupPatient/SignupPatient.component';
+import { SignupPatientComponent } from 'src/Patient/SignupPatient/SignupPatient.component';
 
 
 

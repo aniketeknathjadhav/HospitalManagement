@@ -7,7 +7,7 @@ namespace HospitalManagementMVC.Models
 {
     public class LoginPatient
     {
-        public int id { get; set; }
+        public int patientId { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
 

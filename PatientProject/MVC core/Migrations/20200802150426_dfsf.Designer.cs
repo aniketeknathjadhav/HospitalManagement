@@ -3,14 +3,16 @@ using HospitalManagementMVC.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospitalManagementMVC.Migrations
 {
     [DbContext(typeof(PatientDal))]
-    partial class PatientDalModelSnapshot : ModelSnapshot
+    [Migration("20200802150426_dfsf")]
+    partial class dfsf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

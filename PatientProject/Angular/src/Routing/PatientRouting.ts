@@ -1,4 +1,4 @@
-import {PatientComponent} from '../PatientApp/PatientApp/PatientApp.component'
+import { PatientComponent } from 'src/Patient/PatientApp/PatientApp.component';
 
 
 export const PatientRoutes = [ 

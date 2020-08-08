@@ -1,4 +1,4 @@
-import { LoginAdminComponent } from 'src/PatientApp/LoginAdmin/LoginAdmin.component';
+import { LoginAdminComponent } from 'src/Admin/LoginAdmin/LoginAdmin.component';
 
 
 

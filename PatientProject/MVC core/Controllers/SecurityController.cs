@@ -26,11 +26,11 @@ namespace HospitalManagementMVC.Controllers
     {
         // GET: api/<ValuesController>
         string constr = "";
-        SignupPatientDal dal = null;
-        public SecurityController(IConfiguration configuration, SignupPatientDal _dal)
+        PatientDal pdal = null;
+        public SecurityController(IConfiguration configuration, PatientDal _pdal)
         {
             constr = configuration["ConnStr"];
-            dal = _dal;
+            pdal = _pdal;
         }
 
 
@@ -74,11 +74,11 @@ namespace HospitalManagementMVC.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] LoginPatient obj)
         {
-          var result = dal.SignupPatients.Where(a => a.userName == obj.userName && a.password == obj.password).FirstOrDefault();
+          var result = pdal.Patients.Where(a => a.userName == obj.userName && a.password == obj.password).FirstOrDefault();
          
             if (result!= null)
             {
-                obj.id = result.id;
+                obj.patientId = result.patientId;
                 obj.token = GenerateToken(obj.userName);
                 obj.password = "";
                 return Ok(obj);

@@ -3,7 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 
 import { environment } from './environments/environment';
-import { MasterPageModule } from './PatientApp/MasterPage/MasterPage.module';
+import { MasterPageModule } from './MainMasterPage/MasterPage.module';
 
 if (environment.production) {
   enableProdMode();

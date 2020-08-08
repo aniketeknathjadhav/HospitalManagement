@@ -29,26 +29,40 @@ namespace HospitalManagementMVC.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //insert pRimary key
-            modelBuilder.Entity<Patient>().HasKey(a => a.id);
+            modelBuilder.Entity<Patient>().HasKey(a => a.patientId);
+            modelBuilder.Entity<Problem>().HasKey(a => a.problemId);
+
             //insert pRimary key
-            modelBuilder.Entity<Problem>().HasKey(a => a.id) ;
             //foreign key
             // identity insert off code
-            modelBuilder.Entity<Patient>().Property(e => e.id).ValueGeneratedNever();
-            modelBuilder.Entity<Problem>().Property(e => e.id).UseIdentityColumn();
-           // modelBuilder.Entity<Problem>().Property(e => e.problemId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Patient>().Property(e => e.patientId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Problem>().Property(e => e.problemId).UseIdentityColumn();
+            modelBuilder.Entity<Doctor>().HasKey(a => a.doctorId);
+
+            modelBuilder.Entity<Doctor>().Property(e => e.doctorId).UseIdentityColumn();
+            modelBuilder.Entity<Patient>().HasIndex(e => e.email).IsUnique();
+            modelBuilder.Entity<Patient>().HasIndex(e => e.userName).IsUnique(); 
+            modelBuilder.Entity<Patient>().HasIndex(e => e.contact).IsUnique();
+      
+            // modelBuilder.Entity<Problem>().Property(e => e.problemId).ValueGeneratedOnAdd();
             //this is the mapping code . map model with db
             modelBuilder.Entity<Patient>().ToTable("PatientList");
             modelBuilder.Entity<Problem>().ToTable("ProblemList");
+            modelBuilder.Entity<Doctor>().ToTable("DoctorList");
+           
+
+            //one to manny
             modelBuilder.Entity<Patient>()
-                .HasMany(o => o.problems)
-                .WithOne(o => o.patient)
+                .HasMany(s=> s.problems)
+                .WithOne(s=> s.patient)
+                .HasForeignKey(s=> s.patientId_fk)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
         }
+
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
 
         //set the properties
     }

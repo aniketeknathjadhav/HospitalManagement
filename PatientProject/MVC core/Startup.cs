@@ -47,7 +47,8 @@ namespace HospitalManagementMVC
             });
 
             services.AddDbContext<PatientDal>(options => options.UseSqlServer(Configuration["ConnStr"].ToString()));
-            services.AddDbContext<SignupPatientDal>(options => options.UseSqlServer(Configuration["ConnStr"].ToString()));
+          //  services.AddDbContext<DoctorDal>(options => options.UseSqlServer(Configuration["ConnStr"].ToString()));
+
 
 
             services.AddControllers().AddNewtonsoftJson(options =>

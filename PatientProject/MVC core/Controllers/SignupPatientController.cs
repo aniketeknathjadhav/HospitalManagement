@@ -19,11 +19,11 @@ namespace HospitalManagementMVC.Controllers
     public class SignupPatientController : ControllerBase
     {
         string constr = "";
-        SignupPatientDal sDal = null;
-        public SignupPatientController(IConfiguration configuration, PatientDal _pDal,SignupPatientDal _sDal)
+        PatientDal pDal = null;
+        public SignupPatientController(IConfiguration configuration, PatientDal _pDal)
         {
             constr = configuration["ConnStr"];
-            sDal = _sDal;
+            pDal = _pDal;
         }
         // GET: api/<SignupPatientController>
         [HttpGet]
@@ -43,13 +43,13 @@ namespace HospitalManagementMVC.Controllers
 
         // POST api/<SignupPatientController>
         [HttpPost]
-            public IActionResult Post(SignupPatientModel obj)
+            public IActionResult Post(Patient obj)
             {
 
-                sDal.Add(obj); // first saves in memory
-                sDal.SaveChanges();//then saves physically in sql
-            var result = sDal.SignupPatients.Where(a => a.userName == obj.userName).FirstOrDefault();
-               // List<SignupPatientModel> recs = sDal.SignupPatients.ToList<SignupPatientModel>();
+                pDal.Add(obj); // first saves in memory
+                pDal.SaveChanges();//then saves physically in sql
+                var result = pDal.Patients.Where(a => a.userName == obj.userName).FirstOrDefault();
+               // List<SignupPatient> recs = sDal.SignupPatients.ToList<SignupPatient>();
                 return Ok(result);
             }
         

@@ -5,49 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200710080932_v10072020.cs" />
-    <Compile Remove="Migrations\20200710080932_v10072020.Designer.cs" />
-    <Compile Remove="Migrations\20200710100938_v10072020.cs" />
-    <Compile Remove="Migrations\20200710100938_v10072020.Designer.cs" />
-    <Compile Remove="Migrations\20200710101833_v100720.cs" />
-    <Compile Remove="Migrations\20200710101833_v100720.Designer.cs" />
-    <Compile Remove="Migrations\20200710103930_v100720.cs" />
-    <Compile Remove="Migrations\20200710103930_v100720.Designer.cs" />
-    <Compile Remove="Migrations\20200710105216_v100720.cs" />
-    <Compile Remove="Migrations\20200710105216_v100720.Designer.cs" />
-    <Compile Remove="Migrations\20200711100947_v110720.cs" />
-    <Compile Remove="Migrations\20200711100947_v110720.Designer.cs" />
-    <Compile Remove="Migrations\20200711131500_v110720.cs" />
-    <Compile Remove="Migrations\20200711131500_v110720.Designer.cs" />
-    <Compile Remove="Migrations\20200711141302_v110720.cs" />
-    <Compile Remove="Migrations\20200711141302_v110720.Designer.cs" />
-    <Compile Remove="Migrations\20200711143919_v110720.cs" />
-    <Compile Remove="Migrations\20200711143919_v110720.Designer.cs" />
-    <Compile Remove="Migrations\20200716100116_v16072.cs" />
-    <Compile Remove="Migrations\20200716100116_v16072.Designer.cs" />
-    <Compile Remove="Migrations\20200716101540_v160720.cs" />
-    <Compile Remove="Migrations\20200716101540_v160720.Designer.cs" />
-    <Compile Remove="Migrations\20200716102958_v160720.cs" />
-    <Compile Remove="Migrations\20200716102958_v160720.Designer.cs" />
-    <Compile Remove="Migrations\20200719065706_v190720PatientDal.cs" />
-    <Compile Remove="Migrations\20200719065706_v190720PatientDal.Designer.cs" />
-    <Compile Remove="Migrations\20200722154240_v220720.cs" />
-    <Compile Remove="Migrations\20200722154240_v220720.Designer.cs" />
-    <Compile Remove="Migrations\20200728142709_v280720.cs" />
-    <Compile Remove="Migrations\20200728142709_v280720.Designer.cs" />
-    <Compile Remove="Migrations\20200729075401_v290720.cs" />
-    <Compile Remove="Migrations\20200729075401_v290720.Designer.cs" />
-    <Compile Remove="Migrations\PatientDalMigrations\20200722154441_v220720.cs" />
-    <Compile Remove="Migrations\PatientDalMigrations\20200722154441_v220720.Designer.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200719070342_v19720SignupPatietDal.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200719070342_v19720SignupPatietDal.Designer.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200728142752_v280720.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200728142752_v280720.Designer.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200728171735_v280720.cs" />
-    <Compile Remove="Migrations\SignupPatientDalMigrations\20200728171735_v280720.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
@@ -58,10 +15,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\PatientDalMigrations\" />
   </ItemGroup>
 
 </Project>

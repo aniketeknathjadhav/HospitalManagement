@@ -1,5 +1,5 @@
-import {PatientComponent} from '../PatientApp/PatientApp/PatientApp.component'
-import { AdminComponent } from 'src/PatientApp/AdminApp/AdminApp.component';
+import { AdminComponent } from 'src/Admin/AdminApp/AdminApp.component';
+
 
 
 export const AdminRoutes = [ 

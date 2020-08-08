@@ -1,4 +1,4 @@
-import { LoginPatientComponent } from 'src/PatientApp/LoginPatient/LoginPatient.component';
+import { LoginPatientComponent } from 'src/Patient/LoginPatient/LoginPatient.component';
 
 
 
